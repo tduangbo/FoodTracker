@@ -23,7 +23,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qok-kO-hP4">
                                 <rect key="frame" x="0.0" y="40" width="375" height="424.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg1-1T-kis">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg1-1T-kis">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -59,18 +59,26 @@
                                     <constraint firstAttribute="trailing" secondItem="HLN-Y1-mr7" secondAttribute="trailing" id="kmE-g2-zFd"/>
                                 </constraints>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="n5h-EP-FOf" customClass="RatingControll" customModule="FoodTracker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="472.5" width="262" height="116.5"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.56655229240000005" green="1" blue="0.96269305810000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="n5h-EP-FOf" secondAttribute="bottom" constant="78" id="1pD-eL-eEM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qok-kO-hP4" secondAttribute="trailing" id="EML-t7-YuQ"/>
                             <constraint firstItem="Qok-kO-hP4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="JBL-uQ-W4c"/>
+                            <constraint firstItem="n5h-EP-FOf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="T8Z-9H-uvP"/>
+                            <constraint firstItem="n5h-EP-FOf" firstAttribute="top" secondItem="Qok-kO-hP4" secondAttribute="bottom" constant="8" id="fkd-6I-Ewg"/>
                             <constraint firstItem="Qok-kO-hP4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="x3I-ql-uWK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n5h-EP-FOf" secondAttribute="trailing" constant="113" id="xoc-n2-aWl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="mealName" destination="Bg1-1T-kis" id="OIc-pB-eyb"/>
                         <outlet property="photoImageView" destination="gok-S0-Bi2" id="fDd-Yk-kE6"/>
+                        <outlet property="ratingControl" destination="n5h-EP-FOf" id="b6H-r2-UVW"/>
                         <outlet property="textField" destination="D4s-4t-0Tu" id="QiX-NP-uju"/>
                     </connections>
                 </viewController>
@@ -81,6 +89,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="116" y="40.929535232383813"/>
         </scene>
     </scenes>
     <resources>
