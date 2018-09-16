@@ -45,6 +45,26 @@ class MealTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return meals.count
     }
+    
+    //Mark: Actions
+    
+    @IBAction func unwindToMealList(sender: UIStoryboardSegue){
+        
+        
+        if let sourceViewController = sender.source as? ViewController, let meal = sourceViewController.meal {
+        
+            
+            // add new meal
+            
+            let newIndexPath = IndexPath(row: meals.count, section: 0)
+            
+            meals.append(meal)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            
+            
+        }
+        
+    }
     // Mark: private methods
     
     private func loadSampleMeals(){
