@@ -20,8 +20,7 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Load sample data
-        loadSampleMeals()
+       
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -30,6 +29,17 @@ class MealTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         //Or navigationItem.leftBarButtonItem = editButtonItem
+        
+        if let saveMeals = loadMeals(){
+            
+            meals += saveMeals
+        }else{
+            //Load sample data
+            loadSampleMeals()
+        }
+        
+        
+     
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +75,8 @@ class MealTableViewController: UITableViewController {
                 
             }
             else{
+              
+                
                 // add new meal
                 
                 let newIndexPath = IndexPath(row: meals.count, section: 0)
@@ -72,6 +84,9 @@ class MealTableViewController: UITableViewController {
                 meals.append(meal)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            // Save meal
+            
+            saveMeals()
     
         }
         
@@ -101,7 +116,24 @@ class MealTableViewController: UITableViewController {
        meals += [meal1, meal2, meal3]
     
     }
+    
+    private func saveMeals(){
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
+        if isSuccessfulSave{
+            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+        }else{
+            os_log("Failed to save meals...", log: OSLog.default, type: .error)
 
+        }
+    }
+    
+    
+    private func loadMeals() -> [Meal]? {
+        
+        
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
+        
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -129,7 +161,7 @@ class MealTableViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
+
 
     
     // Override to support editing the table view.
@@ -138,6 +170,10 @@ class MealTableViewController: UITableViewController {
             // Delete the row from the data source
             
             meals.remove(at: indexPath.row)
+            
+            //save Meals
+            saveMeals()
+            
             
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
